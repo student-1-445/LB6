@@ -1,1 +1,3 @@
-# LB6
+# Bug tracking
+
+Bug-tracking labs repository
