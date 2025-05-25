@@ -82,9 +82,9 @@ public class Parser_1 {
                             // берем строку до выражения в скобках
                             expression.substring(0, index) +
                             // вычисляем выражение в скобках и подставляем
-                            calculate(expression.substring(index + 1, lastCloseBracketIndex)) +
-                            // подставляем конец выражения expression
-                            expression.substring(lastCloseBracketIndex + 1);
+                                    calculate(expression.substring(index + 1, lastCloseBracketIndex)) +
+                                    // подставляем конец выражения expression
+                                    expression.substring(lastCloseBracketIndex + 1);
                 }
             }
             index--;
@@ -123,16 +123,14 @@ public class Parser_1 {
                 result = calc(result,
                         // второе число берем
                         Integer.parseInt(expression.substring(prevSignIndex + 1, index)),
-                        prevSign
-                );
+                        prevSign);
                 prevSign = currentChar;
                 prevSignIndex = index;
                 // если дошли до конца
             } else if (index == expression.length() - 1) {
                 result = calc(result,
                         Integer.parseInt(expression.substring(prevSignIndex + 1, index + 1)),
-                        prevSign
-                );
+                        prevSign);
                 break;
             }
             index++;
@@ -160,15 +158,21 @@ public class Parser_1 {
                 break;
             }
             case '/': {
+                if (number == 0) {
+                    throw new ArithmeticException("Деление на ноль");
+                }
                 result /= number;
                 break;
             }
             case '%': {
+                if (number == 0) {
+                    throw new ArithmeticException("Остаток от деления на ноль");
+                }
                 result %= number;
                 break;
             }
             default: {
-                System.out.println("Неправильный знак");
+                throw new IllegalArgumentException("Неправильный знак: " + sign);
             }
         }
         return result;
